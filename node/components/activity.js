@@ -5,22 +5,44 @@ const request  	        = require("request");
 const cheerio  	        = require("cheerio");
 const links  	        = require("../shared/links");
 const cssClasses  	    = require("../shared/cssClasses");
+const settings  	    = require("../shared/settings");
 const maximumLastTime  	= require("../shared/settings").maximumLastTime;
 
 module.exports = function(func) {
     const urls = links.getActivityLinks();
     let resp = [];
 
-    urls.forEach(function(url){
-        request({
-            uri: url.link
-        }, function(error, response, body){
-            callback(body, func, urls.length, resp, url.name)
+    if(settings.useDevJson && settings.devJSON){
+        console.info('settings.devJSON - ',settings.devJSON);
+        func(sortOutputArray(settings.devJSON));
+    }else{
+        urls.forEach(function(url){
+            request({
+                uri: url.link
+            }, function(error, response, body){
+                callback(body, func, urls.length, resp, url.name)
+            });
         });
-    });
+    }
+
+
 
 
 };
+
+/* СОРТИРОВКА МАССИВА ДЛЯ ОТПРАВКИ В БРАУЗЕР, КАК В settings.links */
+function sortOutputArray(arr){
+    const links = settings.links;
+    let sortFn = function(a,b){
+        const aPl = links.indexOf(a.name);
+        const bPl = links.indexOf(b.name);
+
+        return (aPl - bPl);
+    };
+
+    return arr.sort(sortFn)
+
+}
 
 function callback(body, func, count, arr, name) {
     var $;
@@ -35,7 +57,7 @@ function callback(body, func, count, arr, name) {
         });
 
         if(arr.length === count){
-            func(arr);
+            func(sortOutputArray(arr));
         }
     }
 }

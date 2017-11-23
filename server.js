@@ -5,9 +5,10 @@
 const express        = require('express');
 const bodyParser     = require('body-parser');
 const app            = express();
-const port = 8000;
+const port           = require('./node/shared/settings').port;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
 require('./node/routes')(app, {});
 
 app.listen(port, () => {

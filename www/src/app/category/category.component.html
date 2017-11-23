@@ -1,0 +1,49 @@
+<table class="grid-view" >
+    <tr>
+        <th *ngFor="let title of activityData" class="grid-view-title">
+            <span>{{title.name}}</span>
+        </th>
+    </tr>
+    <tr class="grid-view-tr" *ngFor="let num of arrayCell">
+        <td class="grid-view-td activity-card" *ngFor="let act of activityData">
+            <div class="activity-details-div activity-text-div" *ngIf="act.activity[num]">
+                <a href="{{act.activity[num].link}}" target="_blank">{{act.activity[num].text}}</a>
+            </div>
+            <div class="activity-details-div activity-author-div" *ngIf="act.activity[num]">
+                <a href="{{act.activity[num].authorLink}}" target="_blank">{{act.activity[num].authorName}}</a>
+            </div>
+            <div class="activity-details-div" *ngIf="act.activity[num]">
+                <span class="activity-places-span activity-places-{{act.activity[num].places}}">Мест: {{act.activity[num].places}}</span>
+                <span class="activity-time-span">, прошло {{act.activity[num].time}}</span>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+<!--<table class="grid-view" >    -->
+    <!--<tr class="grid-view-tr">-->
+        <!--<td class="grid-view-td activity-card" *ngFor="let res of activityData">-->
+            <!--<div class="activity-name">{{res.name}}</div>-->
+            <!--<ul class="activity-details-ul" >-->
+                <!--<li class="activity-details-li" *ngFor="let act of res.activity">-->
+                    <!--<div class="activity-details-div activity-text-div"><a href="{{act.link}}" target="_blank">{{act.text}}</a></div>-->
+                    <!--<div class="activity-details-div activity-author-div"><a href="{{act.authorLink}}" target="_blank">{{act.authorName}}</a></div>-->
+                    <!--<div class="activity-details-div">-->
+                        <!--<span class="activity-places-span activity-places-{{act.places}}">Мест: {{act.places}}</span>-->
+                        <!--<span class="activity-time-span">, прошло {{act.time}}</span>-->
+                    <!--</div>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</td>-->
+    <!--</tr>-->
+<!--</table>-->
+
+
+<!--authorLink-->
+<!--authorName-->
+<!--link-->
+<!--places-->
+<!--text-->
+<!--time-->

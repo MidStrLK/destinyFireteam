@@ -18,7 +18,8 @@ module.exports.getActivityLinks = function(){
 
 function getLinks(){
     return settings.links.map(val => ({
-        name: val,
-        link: settings.site + settings.prefix + val
-    }));
+            name: val,
+            link: settings.site + settings.prefix + val + settings.postfix
+        })
+    );
 }

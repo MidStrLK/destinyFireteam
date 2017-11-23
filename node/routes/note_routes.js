@@ -5,7 +5,8 @@ const categories    = require('../components/categories');
 const activity      = require('../components/activity');
 
 module.exports = function(app) {
-    app.get('/categories', (req, res) => {
+
+    app.get('/api/categories', (req, res) => {
         let func = function (cat) {
             res.send(cat)
         };
@@ -14,11 +15,13 @@ module.exports = function(app) {
     });
 
 
-    app.get('/activity', (req, res) => {
+    app.get('/api/activity', (req, res) => {
         let func = function (cat) {
             res.send(cat)
         };
 
         activity(func);
     });
+
+
 };

@@ -1,0 +1,45 @@
+.grid-view{
+    table-layout: auto;
+    width: 100%;
+}
+
+.activity-card{
+    vertical-align: top;
+    background-color: #FFC500;
+}
+
+.activity-details-div>a{
+    color: black;
+}
+
+.activity-name{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.activity-text-div>a{
+    font-weight: bold;
+    font-size: 20px;
+}
+.activity-author-div{
+    margin-bottom: 10px;
+}
+
+.activity-author-div>a{
+    font-style: italic;
+}
+
+.activity-details-li{
+    margin-bottom: 15px;
+}
+
+.activity-places-span{
+    background-color: green;
+    color: white;
+}
+.activity-places-1{
+    background-color: red;
+    color: yellow;
+}
