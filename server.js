@@ -6,10 +6,12 @@ const express        = require('express');
 const bodyParser     = require('body-parser');
 const app            = express();
 const port           = require('./node/shared/settings').port;
-const server_port           = process.env.OPENSHIFT_NODEJS_PORT || port || 8080;
-const server_ip_address     = process.env.OPENSHIFT_NODEJS_IP   || '127.0.0.1';
+const server_port           = process.env['OPENSHIFT_NODEJS_PORT'] || port || 8080;
+const server_ip_address     = process.env['OPENSHIFT_NODEJS_IP']   || '127.0.0.1';
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+console.log(server_port, server_ip_address);
 
 require('./node/routes')(app, {});
 
