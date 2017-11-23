@@ -5,18 +5,20 @@
 
 .activity-card{
     vertical-align: top;
-    background-color: #FFC500;
+    background-color: #181c25;
 }
 
 .activity-details-div>a{
-    color: black;
+    color: white;
 }
 
-.activity-name{
+.grid-view-title{
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     text-decoration: underline;
+    color: white;
+    background-color: #303948;
 }
 
 .activity-text-div>a{
@@ -29,6 +31,7 @@
 
 .activity-author-div>a{
     font-style: italic;
+    color: #7f858d;
 }
 
 .activity-details-li{
@@ -41,5 +44,9 @@
 }
 .activity-places-1{
     background-color: red;
-    color: yellow;
+    color: white;
+}
+
+.activity-time-span{
+    color: #7f858d;
 }

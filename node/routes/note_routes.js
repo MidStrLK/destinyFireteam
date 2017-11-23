@@ -20,7 +20,7 @@ module.exports = function(app) {
             res.send(cat)
         };
 
-        activity(func);
+        activity(func, req.query.time);
     });
 
 

@@ -1,8 +1,10 @@
 /**
  * Created by eds on 22.11.2017.
  */
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input, Output } from '@angular/core'
 import { HttpClient} from '@angular/common/http';
+
+import { InteractionService }      from '../shared/interaction.service';
 
 @Component({
     selector: 'category-table',
@@ -12,16 +14,19 @@ import { HttpClient} from '@angular/common/http';
 export class CategoryComponent  implements OnInit {
     activityData:any[];
     arrayCell:any[];
+    constructor(private interactionService:  InteractionService,
+                private  http: HttpClient){
+        interactionService.runGetActivity.subscribe(data => this.getActivity(data));
+    }
 
-    constructor(private http: HttpClient){}
+    /*ngOnInit(){
 
-    ngOnInit(){
-        this.http.get('/api/activity').subscribe((data) => {
+    }*/
+
+    public getActivity(data){
+        this.http.get('/api/activity?time=' + data).subscribe((data) => {
             this.arrayCell = this.getArrayCell(data);
             this.activityData = data;
-
-            console.info('this.arrayCell - ',this.arrayCell);
-            console.info('this.activityData - ',this.activityData);
         });
     }
 

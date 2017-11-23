@@ -1,0 +1,187 @@
+﻿
+
+.fullWidthHeader h1 {
+}
+
+.darkThemeContent.grid {
+
+	    /*background-color: rgb(29, 35, 43);
+    background-image: url(/img/theme/destiny/bgs/clan/clanOverlay.png);
+    background-position: 265px -65px;
+    background-repeat: no-repeat;
+    background-size: cover;
+	max-width: 90%;
+	height: 100%;*/
+
+}
+
+
+.topic .threadInfoBox .title {
+	font-weight: 400;
+}
+
+.sidenav_promo {
+	display: none;
+}
+
+.postCreation .codeofconduct, .recruitForm .codeofconduct {
+	display: none;
+}
+
+.containerTags.small .tag {
+    font-size: 10px;
+    font-weight: 400;
+    margin: 6px 0px 0px 0px;
+    padding: 2px 5px 2px 5px;
+    opacity: 0.85;
+    text-transform: lowercase;
+}
+
+
+#Nav_Forum .report span.fa-square {
+    color: #884a6c;
+}
+
+.topic .tags [data-tag="report"],
+.topic .tags [data-tag="Report"],
+.topic .tags [data-officialtag="report"],
+.topic .tags [data-officialtag="Report"] {
+	background: #884a6c none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+
+#Nav_Forum .pve span.fa-square {
+    color: #685582;
+}
+
+.topic .tags [data-tag="pve"],
+.topic .tags [data-tag="PvE"],
+.topic .tags [data-officialtag="pve"],
+.topic .tags [data-officialtag="PvE"] {
+	background: #685582 none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+#Nav_Forum .pvp span.fa-square {
+    color: #7777b9;
+}
+
+.topic .tags [data-tag="pvp"],
+.topic .tags [data-tag="PvP"],
+.topic .tags [data-officialtag="pvp"],
+.topic .tags [data-officialtag="PvP"] {
+	background: #6a6aa0 none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+#Nav_Forum .sandbox span.fa-square {
+    color: #678DCA;
+}
+
+.topic .tags [data-tag="sandbox"],
+.topic .tags [data-tag="Sandbox"],
+.topic .tags [data-officialtag="sandbox"],
+.topic .tags [data-officialtag="Sandbox"] {
+	background: #5c80bb none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+
+#Nav_Forum .clans span.fa-square {
+    color: #649878;
+}
+
+.topic .tags [data-tag="clans"],
+.topic .tags [data-tag="Clans"],
+.topic .tags [data-officialtag="clans"],
+.topic .tags [data-officialtag="Clans"] {
+	background: #649878 none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+#Nav_Forum .rewards span.fa-square {
+    color: #93a55b;
+}
+
+.topic .tags [data-tag="rewards"],
+.topic .tags [data-tag="Rewards"],
+.topic .tags [data-officialtag="rewards"],
+.topic .tags [data-officialtag="Rewards"] {
+	background: #738144 none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+
+#Nav_Forum .uix span.fa-square {
+    color: #a3873f;
+}
+
+.topic .tags [data-tag="uix"],
+.topic .tags [data-tag="Uix"],
+.topic .tags [data-officialtag="uix"],
+.topic .tags [data-officialtag="Uix"] {
+	background: #a3873f none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+#Nav_Forum .pcbuild span.fa-square {
+    color: #a35e3f;
+}
+
+.topic .tags [data-tag="pcbuild"],
+.topic .tags [data-tag="PCbuild"],
+.topic .tags [data-officialtag="pcbuild"],
+.topic .tags [data-officialtag="Pcbuild"] {
+	background: #a35e3f none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+#Nav_Forum .Companion span.fa-square {
+    color: rgb(163, 63, 63);
+}
+
+.topic .tags [data-tag="companion"],
+.topic .tags [data-tag="Companion"],
+.topic .tags [data-officialtag="companion"],
+.topic .tags [data-officialtag="Companion"] {
+	background: rgb(163, 63, 63) none repeat scroll 0 0;
+	color: #fff !important;
+}
+
+.topic .tags [data-tag="feedback"],
+.topic .tags [data-tag="Feedback"],
+.topic .tags [data-officialtag="feedback"],
+.topic .tags [data-officialtag="Feedback"] {
+	background: #8E4D4D none repeat scroll 0 0;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.topic .imageBox {
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* border: 2px solid rgb(34, 40, 47); */
+    cursor: pointer;
+    display: block;
+    -ms-flex: 0 1 auto;
+    -webkit-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-filter: grayscale(20%);
+    /* margin-left: 9px; */
+    opacity: 0.3;
+    width: 93px;
+    margin-right: 18px;
+    margin-left: -3px;
+    min-height: 51px;
+    max-height: 51px;
+    transition: 0.5s;
+}
+
+.container_followedTagsList {
+	display: none;
+}
+
+.recruitmentSideNav .fa-pencil {
+	display: none;
+}

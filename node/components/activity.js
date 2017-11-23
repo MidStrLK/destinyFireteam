@@ -8,19 +8,18 @@ const cssClasses  	    = require("../shared/cssClasses");
 const settings  	    = require("../shared/settings");
 const maximumLastTime  	= require("../shared/settings").maximumLastTime;
 
-module.exports = function(func) {
+module.exports = function(func, timeCount) {
     const urls = links.getActivityLinks();
     let resp = [];
 
     if(settings.useDevJson && settings.devJSON){
-        console.info('settings.devJSON - ',settings.devJSON);
         func(sortOutputArray(settings.devJSON));
     }else{
         urls.forEach(function(url){
             request({
                 uri: url.link
             }, function(error, response, body){
-                callback(body, func, urls.length, resp, url.name)
+                callback(body, func, urls.length, resp, url.name, timeCount)
             });
         });
     }
@@ -44,12 +43,12 @@ function sortOutputArray(arr){
 
 }
 
-function callback(body, func, count, arr, name) {
+function callback(body, func, count, arr, name, timeCount) {
     var $;
     if(body) $ = cheerio.load(body);
 
     if($ && typeof $ === 'function'){
-        let activity = getActivity($);
+        let activity = getActivity($, timeCount);
 
         arr.push({
             name: name,
@@ -63,15 +62,15 @@ function callback(body, func, count, arr, name) {
 }
 
 /* ПОЛУЧАЕМ СПИСОК АКТИВНОСТЕЙ */
-function getActivity($){
+function getActivity($, timeCount){
     const cssClass = cssClasses.getActivityClass();
     const result = [];
 
     if(cssClass) {
         $(cssClass).each(function (key, val) {
-            const fullItem = getFullItem(val.children);
+            const fullItem = getFullItem(val.children, timeCount);
 
-            if(fitsItem(fullItem)) {
+            if(fitsItem(fullItem, timeCount)) {
                 result.push(fullItem);
             }
         });
@@ -83,6 +82,8 @@ function getActivity($){
 /* СОБИРАЕМ ПОЛНЫЙ ИТЕМ */
 function getFullItem(childrens){
     let result = {};
+
+    result.type = getType(childrens);
 
     childrens.forEach(function(ch){
         if (ch.type === 'tag' && ch.name === 'div' && ch['attribs']){
@@ -109,9 +110,23 @@ function getFullItem(childrens){
     return result;
 }
 
+function getType(allMeta){
+    let result = null,
+        itemClass = allMeta[0].parent.parent.parent.parent.parent.attribs.class,
+        classIndex = settings.classIndex;
+
+    classIndex.forEach(function(val){
+        if(itemClass.indexOf(val) !== -1) result = val;
+    });
+
+
+    return result;
+}
+
 /* ПРОВЕРКА, ПОДХОДИТ ЛИ ИТЕМ (проверяется кол-во мест и прошедшее время) */
-function fitsItem(item){
-    return (item.places & parseInt(item.time) < maximumLastTime);
+function fitsItem(item, timeCount){
+    const maxTime = timeCount || maximumLastTime;
+    return (item.places && parseInt(item.time) < maxTime && !item.type);
 }
 
 /* ВОЗВРАЩАЕТ ССЫЛКУ, ТЕКСТ И ОСТАТОК МЕСТ */

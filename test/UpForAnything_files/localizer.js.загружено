@@ -1,0 +1,76 @@
+﻿var Localizer = {
+	Regex: {
+		curly: new RegExp("{([a-z0-9]+)}", "gi"),
+		dollar: /\$\$([a-z0-9]+)\$\$/gi
+	}
+};
+var cookieLocaleLocalizer = {};
+cookieLocaleLocalizer.fnGetStrings = function(loc,key)
+{
+	return this[loc][key];
+}
+
+
+// locString	-	Localization string to be processed
+//
+// replaceObj	-	Object containing associative array of replacements. Array keys are 
+//					the string identifiers, not including the delimiters (e.g. if the
+//					delimited string is $$message$$, the format you'd pass in would be
+//					message : 'Replace with this text'
+//
+// delimiters	-	Defaults to ["{","}"]
+//					The characters that denote a replacable string.
+
+// DEPRECATED - FOR ALL NEW STRINGS, USE Localizer.Format
+Localizer.fnStringReplace = function (locString, replaceObj, delimiter) {
+	if (delimiter === undefined) delimiter = "\\$\\$";
+
+	for (key in replaceObj)
+	{
+		if (replaceObj.hasOwnProperty(key))
+		{
+			var re = new RegExp(delimiter + key + delimiter, "g");
+			locString = locString.replace(re, replaceObj[key]);
+		}
+	}
+
+	return locString;
+};
+
+Localizer.Format = function (localizationString, replaceWith) {
+	var matched, regexToUse, formattedString = localizationString;
+
+	if (formattedString.match(Localizer.Regex.curly)) {
+		regexToUse = Localizer.Regex.curly;
+	}
+	else if (formattedString.match(Localizer.Regex.dollar))
+	{
+		regexToUse = Localizer.Regex.dollar;
+	}
+
+	if (regexToUse)
+	{
+		while (matched = regexToUse.exec(localizationString))
+		{
+			var replaceThis = matched[0];
+			var replaceKey = matched[1];
+			if (replaceWith[replaceKey] != undefined)
+			{
+				formattedString = formattedString.replace(replaceThis, replaceWith[replaceKey]);
+			}
+		}
+	}
+
+	return formattedString;
+};
+
+// A shortcut method for quickly getting and template replacing a string.
+// sectionName	- the section in the localizer in which the string should be found.
+// stringKey	- the key for the string within the given localizer section.
+// replaceObj	- an associative array of replacement strings, see above.
+// delimiter	- the delimiter to use for locating replaceObj replacements, see above.  Defaults to "$$"
+Localizer.fnGetTemplatedString = function (sectionName, stringKey, replaceObj, delimiter) {
+	var stringValue = Localizer[sectionName][stringKey.toLowerCase()];
+
+	return Localizer.fnStringReplace(stringValue, replaceObj, delimiter);
+};
