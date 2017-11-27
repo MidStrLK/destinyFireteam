@@ -1,7 +1,7 @@
 /**
  * Created by eds on 22.11.2017.
  */
-import { Component, OnInit, Input, Output } from '@angular/core'
+import { Component } from '@angular/core'
 import { HttpClient} from '@angular/common/http';
 
 import { InteractionService }      from '../shared/interaction.service';
@@ -11,8 +11,8 @@ import { InteractionService }      from '../shared/interaction.service';
     templateUrl: './category.component.html',
     styleUrls: ['./category.component.css']
 })
-export class CategoryComponent  implements OnInit {
-    activityData:any[];
+export class CategoryComponent {
+    activityData: any;
     arrayCell:any[];
     constructor(private interactionService:  InteractionService,
                 private  http: HttpClient){

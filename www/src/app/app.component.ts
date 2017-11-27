@@ -13,7 +13,7 @@ export class AppComponent {
     buttonLabel: string = this.buttonRun;
     intervalId = null;
     timerId = null;
-    timerCount: number = 0;
+    timerCount: string = '';
     time: number = 20;
 
     constructor(private InteractionService: InteractionService) {}
@@ -51,9 +51,9 @@ export class AppComponent {
         let me = this;
 
         this.timerId = setInterval(function(){
-            if(!me.timerCount) me.timerCount = me.timerInterval;
-            me.timerCount = (me.timerCount - 100/1000).toFixed(1) ;
-            if(me.timerCount < 0.3){
+            if(!me.timerCount) me.timerCount = me.timerInterval.toFixed(1);
+            me.timerCount = (Number(me.timerCount) - 100/1000).toFixed(1) ;
+            if(parseFloat(me.timerCount) < 0.3){
                 me.stopTimer();
             }
         }, 100)
@@ -61,7 +61,7 @@ export class AppComponent {
 
     stopTimer(){
         clearInterval(this.timerId);
-        this.timerCount = 0;
+        this.timerCount = '';
     }
 
     runCheckInterval(){
