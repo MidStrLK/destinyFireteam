@@ -14,6 +14,11 @@ import { InteractionService }      from '../shared/interaction.service';
 export class CategoryComponent {
     activityData: any;
     arrayCell:any[];
+    hoveredArray: any[] = [];
+    hoveredParameter: string = 'link';
+    vizitedObject: any = {};
+    vizitedClass: string[] = ['vizited-new', 'vizited-old', 'vizited-read'];
+
     constructor(private interactionService:  InteractionService,
                 private  http: HttpClient){
         interactionService.runGetActivity.subscribe(data => this.getActivity(data));
@@ -25,9 +30,28 @@ export class CategoryComponent {
 
     public getActivity(data){
         this.http.get('/api/activity?time=' + data).subscribe((data) => {
+            this.setVizitedObject(data);
             this.arrayCell = this.getArrayCell(data);
             this.activityData = data;
         });
+    }
+
+    setVizitedObject(data){
+        data.forEach(cathegory => cathegory['activity'].forEach(val => {
+            if(!this.vizitedObject[val.link]){
+                this.vizitedObject[val.link] = this.vizitedClass[0];
+            }else if(this.vizitedObject[val.link] !== this.vizitedClass[2]){
+                this.vizitedObject[val.link] = this.vizitedClass[1];
+            }
+        }));
+    }
+
+    onMouseOver(event, data){
+        if(!data || !data[this.hoveredParameter]) return;
+
+        const hoveredParameter = data[this.hoveredParameter];
+
+        this.vizitedObject[hoveredParameter] = this.vizitedClass[2];
     }
 
     getArrayCell(arr){

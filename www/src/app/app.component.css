@@ -1,3 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+
+.run-button{
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    margin: 0;
+    color: #212833;
+    background: rgba(255,206,31,0.8);
+    border: none;
+    font-weight: bold;
+    float: left;
+}
+
+.header-timer-div{
+    width: 100px;
+    float: left;
+    text-align: center;
+    font-size: 34px;
+}
+
 .header-timer{
     color: white;
+ }
+
+#input-seconds,
+#input-time{
+    height: 26px;
+}
+
+.text-span{
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: white;
+}
+
+.text-span-margin{
+    margin-left: 20px;
+}
+
+#input-seconds,
+#input-time {
+    width: 40px;
+    background: rgba(255,206,31,0.8);
+    border: none;
+    margin: 0 6px;
 }

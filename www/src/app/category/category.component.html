@@ -5,15 +5,15 @@
         </th>
     </tr>
     <tr class="grid-view-tr" *ngFor="let num of arrayCell">
-        <td class="grid-view-td activity-card" *ngFor="let act of activityData">
-            <div class="activity-details-div activity-text-div" *ngIf="act.activity[num]">
+        <td *ngFor="let act of activityData" class="grid-view-td activity-card"  on-mouseover="onMouseOver($event, act.activity[num])">
+            <div class="activity-details-div activity-text-div {{vizitedObject[act.activity[num].link]}}" *ngIf="act.activity[num]">
                 <a href="{{act.activity[num].link}}" target="_blank">{{act.activity[num].text}}</a>
             </div>
             <div class="activity-details-div activity-author-div" *ngIf="act.activity[num]">
                 <a href="{{act.activity[num].authorLink}}" target="_blank">{{act.activity[num].authorName}}</a>
             </div>
             <div class="activity-details-div" *ngIf="act.activity[num]">
-                <span class="activity-places-span activity-places-{{act.activity[num].places}}">Мест: {{act.activity[num].places}}</span>
+                <span class="activity-places-span activity-places-{{act.activity[num].places}}  {{vizitedObject[act.activity[num].link]}}">Мест: {{act.activity[num].places}}</span>
                 <span class="activity-time-span">, прошло {{act.activity[num].time}}</span>
             </div>
         </td>

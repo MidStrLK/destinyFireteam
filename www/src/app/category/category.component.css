@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 .grid-view{
     table-layout: auto;
     width: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
 .activity-card{
@@ -15,14 +18,14 @@
 .grid-view-title{
     text-align: center;
     font-size: 25px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     text-decoration: underline;
     color: white;
     background-color: #303948;
 }
 
 .activity-text-div>a{
-    font-weight: bold;
+    /*font-weight: bold;*/
     font-size: 20px;
 }
 .activity-author-div{
@@ -49,4 +52,21 @@
 
 .activity-time-span{
     color: #7f858d;
+}
+
+.vizited-new>a,
+.vizited-new.activity-places-span{
+    opacity: 1;
+    color: yellow;
+}
+
+.vizited-old>a,
+.vizited-old.activity-places-span{
+    opacity: 0.8;
+}
+
+.vizited-read>a,
+.vizited-read.activity-places-span{
+    opacity: 0.6;
+    
 }
