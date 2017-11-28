@@ -10,12 +10,12 @@ module.exports = {
     ],
 
     links: [
-        'UpForAnything'/*,
+        'UpForAnything',
          'Raid',
          'Nightfall',
          'Strikes',
          'TrialsOfNine',
-         'CruciblePvP'*/
+         'CruciblePvP'
     ],
 
     prefix: '/ru/Forums/Topics?pNumber=0&tSort=1&tType=0&lang=ru&d=3&tg=Recruitment%20BattleNet%20',
