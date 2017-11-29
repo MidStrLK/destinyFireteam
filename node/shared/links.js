@@ -3,16 +3,16 @@
  */
 const settings = require("./settings");
 
-module.exports.getCategoriesLink = function(){
-    return getLinks()[0] || null;
+module['exports'].getCategoriesLink = function(){
+    return getLinks()[0].link || null;
 };
 
-module.exports.getSiteLink = function(){
+module['exports'].getSiteLink = function(){
     return settings.site || null;
 };
 
 
-module.exports.getActivityLinks = function(){
+module['exports'].getActivityLinks = function(){
     return getLinks() || [];
 };
 

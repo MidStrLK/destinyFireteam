@@ -3,6 +3,7 @@
  */
 const request  	    = require("request");
 const cheerio  	    = require("cheerio");
+const settings      = require("../shared/settings");
 const links  	    = require("../shared/links");
 const cssClasses  	= require("../shared/cssClasses");
 
@@ -29,18 +30,34 @@ function callback(body, func) {
     }
 }
 
+function getCategoryName(link){
+    let result = '';
+
+    if(settings && settings.links && settings.links.forEach && link){
+        settings.links.forEach(val => {
+            if(link.indexOf(val) !== -1) result = val;
+        })
+    }
+
+    return result;
+}
+
 function getCategories($){
     const cssClass = cssClasses.getCategoriesClass();
-    const result = [];
+    const result = {arr:[]};
 
     if(cssClass) {
-        $(cssClass).each(function (key, val) {
-            const link = val.attribs.href;
+        $(cssClass)['each'](function (key, val) {
+            const link = val['attribs'].href;
             const text = val.children[1].data;
+            const name = getCategoryName(link);
 
-            result.push({
+            if(name) result[name] = text;
+
+            result.arr.push({
                 text: text,
-                link: link
+                link: link,
+                name: name
             })
         });
     }

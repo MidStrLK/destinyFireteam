@@ -3,31 +3,35 @@
  */
 const request  	        = require("request");
 const cheerio  	        = require("cheerio");
+const categories  	    = require("./categories");
 const links  	        = require("../shared/links");
 const cssClasses  	    = require("../shared/cssClasses");
 const settings  	    = require("../shared/settings");
 const maximumLastTime  	= require("../shared/settings").maximumLastTime;
 
 module.exports = function(func, timeCount) {
+    if(settings['useDevJson'] && settings.devJSON){
+        func(sortOutputArray(settings.devJSON));
+    }else{
+        categories(cat => {
+            getActivityRequests(func, timeCount, cat);
+        });
+
+    }
+};
+
+function getActivityRequests(func, timeCount, cat){
     const urls = links.getActivityLinks();
     let resp = [];
 
-    if(settings.useDevJson && settings.devJSON){
-        func(sortOutputArray(settings.devJSON));
-    }else{
-        urls.forEach(function(url){
-            request({
-                uri: url.link
-            }, function(error, response, body){
-                callback(body, func, urls.length, resp, url.name, timeCount)
-            });
+    urls.forEach(function(url){
+        request({
+            uri: url.link
+        }, function(error, response, body){
+            callback(body, func, urls.length, resp, url.name, timeCount, cat)
         });
-    }
-
-
-
-
-};
+    });
+}
 
 /* СОРТИРОВКА МАССИВА ДЛЯ ОТПРАВКИ В БРАУЗЕР, КАК В settings.links */
 function sortOutputArray(arr){
@@ -43,7 +47,7 @@ function sortOutputArray(arr){
 
 }
 
-function callback(body, func, count, arr, name, timeCount) {
+function callback(body, func, count, arr, name, timeCount, cat) {
     var $;
     if(body) $ = cheerio.load(body);
 
@@ -51,7 +55,7 @@ function callback(body, func, count, arr, name, timeCount) {
         let activity = getActivity($, timeCount);
 
         arr.push({
-            name: name,
+            name: (cat && cat[name]) ? cat[name] : name,
             activity: activity
         });
 
@@ -67,7 +71,7 @@ function getActivity($, timeCount){
     const result = [];
 
     if(cssClass) {
-        $(cssClass).each(function (key, val) {
+        $(cssClass)['each'](function (key, val) {
             const fullItem = getFullItem(val.children, timeCount);
 
             if(fitsItem(fullItem, timeCount)) {
@@ -112,7 +116,7 @@ function getFullItem(childrens){
 
 function getType(allMeta){
     let result = null,
-        itemClass = allMeta[0].parent.parent.parent.parent.parent.attribs.class,
+        itemClass = allMeta[0].parent.parent.parent.parent.parent['attribs']['class'],
         classIndex = settings.classIndex;
 
     classIndex.forEach(function(val){
@@ -184,8 +188,8 @@ function getFromTopicAuthor(childrens){
         if (ch.type === 'tag' && ch.name === 'a') {
             let chZero = ch.children[0];
 
-            if (ch && ch.attribs && ch.attribs.href) {
-                result.authorLink = links.getSiteLink() + ch.attribs.href;
+            if (ch && ch['attribs'] && ch['attribs'].href) {
+                result.authorLink = links.getSiteLink() + ch['attribs'].href;
 
             }
             if (chZero && chZero && chZero && chZero.data) {
@@ -206,7 +210,7 @@ function getFromTopicDetails(childrens){
     };
 
     childrens.forEach(function(ch) {
-        if (ch.type === 'tag' && ch.name === 'div' && ch.attribs && ch.attribs['class'] === 'lastReplied') {
+        if (ch.type === 'tag' && ch.name === 'div' && ch['attribs'] && ch['attribs']['class'] === 'lastReplied') {
             let lastReplied = ch.children;
 
             lastReplied.forEach(function(val){
@@ -215,9 +219,7 @@ function getFromTopicDetails(childrens){
 
                     p.forEach(function(val){
                         if (val.type === 'tag' && val.name === 'span') {
-                            let time = getLastTime(val.children[0].data);
-
-                            result.time = time;
+                            result.time = getLastTime(val.children[0].data);
                         }
                     });
                 }
