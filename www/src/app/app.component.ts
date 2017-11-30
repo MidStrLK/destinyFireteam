@@ -16,8 +16,11 @@ export class AppComponent {
     timerCountDefault: string = '0.0';
     timerCount: string = '0.0';
     time: number = 20;
+    requestIsActive: boolean = false;
 
-    constructor(private InteractionService: InteractionService) {}
+    constructor(private interactionService: InteractionService) {
+        interactionService.runRequestIsActive.subscribe(isActive => (this.requestIsActive = isActive));
+    }
 
     @Input() timerInterval: number = 10;
 
@@ -82,6 +85,6 @@ export class AppComponent {
     }
 
     checkFunction(){
-        this.InteractionService.getActivityFromMain(this.time);
+        this.interactionService.getActivityFromMain(this.time);
     }
 }

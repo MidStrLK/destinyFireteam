@@ -1,12 +1,19 @@
 <div class="header">
     <button class="run-button" (click)="onButtonRunClick($event)">{{buttonLabel}}</button>
+
     <div class="header-timer-div"><span class="header-timer">{{timerCount}}</span></div>
+
+    <div class="request_is_passive" *ngIf="!requestIsActive"></div>
+    <div class="request_is_active"  *ngIf="requestIsActive"></div>
+
     <span class="text-span">Обновление раз в</span>
     <input id="input-seconds" type="number" name="seconds" min="1" max="60" [ngModel]="timerInterval" (ngModelChange)="onChangeTimer($event)">
     <span class="text-span">сек.</span>
+
     <span class="text-span text-span-margin">Показать данные за последние</span>
     <input id="input-time" type="number" name="time" min="1" max="60" [ngModel]="time" (ngModelChange)="onChangeTimeCount($event)">
     <span class="text-span">минут.</span>
+
 </div>
 
 <category-table></category-table>

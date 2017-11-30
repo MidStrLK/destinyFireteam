@@ -1,0 +1,5 @@
+<svg width="35px"  height="35px"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-eclipse" style="animation-play-state: running; animation-delay: 0s; background: none;">
+    <path ng-attr-d="{{config.pathCmd}}" ng-attr-fill="{{config.color}}" stroke="none" d="M20 50A30 30 0 0 0 80 50A30 33 0 0 1 20 50" fill="rgba(100%,80.7843137254902%,12.15686274509804%,0.8)" transform="rotate(224 50 51.5)" style="animation-play-state: running; animation-delay: 0s;" class="">
+      <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 51.5;360 50 51.5" keyTimes="0;1" dur="1.5s" begin="0s" repeatCount="indefinite" style="animation-play-state: running; animation-delay: 0s;" class=""></animateTransform>
+    </path>
+  </svg>

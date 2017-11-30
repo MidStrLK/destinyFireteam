@@ -13,10 +13,11 @@
 }
 
 .header-timer-div{
-    width: 100px;
+    width: 60px;
     float: left;
     text-align: center;
     font-size: 34px;
+    margin-left: 10px;
 }
 
 .header-timer{
@@ -43,4 +44,20 @@
     background: rgba(255,206,31,0.8);
     border: none;
     margin: 0 6px;
+}
+
+.request_is_active,
+.request_is_passive{
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin-right: 10px;
+}
+
+.request_is_active{
+    background-image: url("../img/Facebook.svg");
+}
+
+.request_is_passive{
+    background-image: url("../img/Facebook.png");
 }

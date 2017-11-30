@@ -8,9 +8,15 @@ import { Subject }                          from 'rxjs/Subject'
 
 export class InteractionService{
     public runGetActivity = new Subject<any>();
+    public runRequestIsActive = new Subject<any>();
 
-    getActivityFromMain(id: number){
-        this.runGetActivity.next(id)
+    getActivityFromMain(time: number){
+        this.runGetActivity.next(time)
+    }
+
+
+    setRequestIsActive(requestIsActive: boolean){
+        this.runRequestIsActive.next(requestIsActive)
     }
 
 }

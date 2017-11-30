@@ -1,7 +1,7 @@
 <table class="grid-view" >
     <tr>
         <th *ngFor="let title of activityData" class="grid-view-title">
-            <span *ngIf="title.activity.length">{{title.name}}</span>
+            <span *ngIf="title.activity.length">{{title.label}}</span>
         </th>
     </tr>
     <tr class="grid-view-tr" *ngFor="let num of arrayCell">

@@ -55,7 +55,8 @@ function callback(body, func, count, arr, name, timeCount, cat) {
         let activity = getActivity($, timeCount);
 
         arr.push({
-            name: (cat && cat[name]) ? cat[name] : name,
+            label: (cat && cat[name]) ? cat[name] : name,
+            name: name,
             activity: activity
         });
 

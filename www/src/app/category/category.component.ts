@@ -21,18 +21,21 @@ export class CategoryComponent {
 
     constructor(private interactionService:  InteractionService,
                 private  http: HttpClient){
-        interactionService.runGetActivity.subscribe(data => this.getActivity(data));
+        interactionService.runGetActivity.subscribe(time => this.getActivity(time));
     }
 
     /*ngOnInit(){
 
     }*/
 
-    public getActivity(data){
-        this.http.get('/api/activity?time=' + data).subscribe((data) => {
+    public getActivity(time){
+        this.interactionService.setRequestIsActive(true);
+
+        this.http.get('/api/activity?time=' + time).subscribe((data) => {
             this.setVizitedObject(data);
             this.arrayCell = this.getArrayCell(data);
             this.activityData = data;
+            this.interactionService.setRequestIsActive(false);
         });
     }
 
