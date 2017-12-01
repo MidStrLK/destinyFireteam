@@ -36,11 +36,9 @@ export class AppComponent {
     onChangeTimer(count){
         this.timerInterval = count;
 
-        if(this.buttonLabel === this.buttonStop){
+        /*if(this.buttonLabel === this.buttonStop){
             this.runCheckInterval();
-        }
-
-
+        }*/
     }
 
     onChangeTimeCount(time){
@@ -70,10 +68,13 @@ export class AppComponent {
 
     runCheckInterval(){
         let me = this;
+
         this.stopCheckInterval();
+        this.stopTimer();
         this.checkFunction();
         this.runTimer();
         this.intervalId = setInterval(function(){
+            me.stopTimer();
             me.runTimer();
             me.checkFunction()
         }, this.timerInterval*1000);
