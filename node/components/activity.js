@@ -9,20 +9,27 @@ const cssClasses  	    = require("../shared/cssClasses");
 const settings  	    = require("../shared/settings");
 const maximumLastTime  	= require("../shared/settings").maximumLastTime;
 
-module.exports = function(func, timeCount) {
+module.exports = function(func, timeCount, type) {
     if(settings['useDevJson'] && settings.devJSON){
         func(sortOutputArray(settings.devJSON));
     }else{
         categories(cat => {
-            getActivityRequests(func, timeCount, cat);
+            getActivityRequests(func, timeCount, cat, type);
         });
 
     }
 };
 
-function getActivityRequests(func, timeCount, cat){
-    const urls = links.getActivityLinks();
+function getActivityRequests(func, timeCount, cat, type){
+    let urls = links.getActivityLinks();
     let resp = [];
+
+    if(type){
+        const urlsOld = urls;
+        urlsOld.forEach(value => {
+            if(value.name === type) urls = [value];
+        })
+    }
 
     urls.forEach(function(url){
         request({
