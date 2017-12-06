@@ -58,7 +58,6 @@ function runWatch(callback, type, timeCount){
     clearInterval(intervalId);
 
     intervalId = setInterval(function(){
-        console.log('run activity');
         activity(callback, null, type);
     }, (timeCount || defaultTimeCount)*1000)
 }

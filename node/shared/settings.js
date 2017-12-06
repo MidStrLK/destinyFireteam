@@ -28,7 +28,7 @@ module.exports = {
 
     activityClass: '.recruitmentbattlenet>.threadContainer>.threadInfoBox>.threadMeta>.allMeta',
 
-    maximumLastTime: 600,
+    maximumLastTime: 60,
 
     //useDevJson: true,
 

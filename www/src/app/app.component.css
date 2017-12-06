@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 
+input{
+    font-size: 18px;
+}
+
 .run-button{
     padding: 10px;
     text-align: center;
@@ -35,7 +39,7 @@
 }
 
 .text-span-margin{
-    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #input-seconds,
@@ -60,4 +64,9 @@
 
 .request_is_passive{
     background-image: url("../img/Facebook.png");
+}
+
+.text-div{
+    float: left;
+    white-space: nowrap;
 }

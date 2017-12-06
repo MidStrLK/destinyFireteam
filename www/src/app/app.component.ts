@@ -30,6 +30,7 @@ export class AppComponent {
         }else{
             this.stopCheckInterval();
         }
+
         this.changeButtonLabel();
     }
 
@@ -58,24 +59,31 @@ export class AppComponent {
             if(parseFloat(me.timerCount) < 0.3){
                 me.stopTimer();
             }
-        }, 100)
+        }, 100);
+
+        console.info('runTimer - ',this.timerId);
     }
 
     stopTimer(){
+        console.info('stopTimer - ',this.timerId);
         clearInterval(this.timerId);
         this.timerCount = this.timerCountDefault;
+    }
+
+    restartTimer(){
+        this.stopTimer();
+        this.runTimer();
     }
 
     runCheckInterval(){
         let me = this;
 
         this.stopCheckInterval();
-        this.stopTimer();
         this.checkFunction();
-        this.runTimer();
+        this.restartTimer();
+
         this.intervalId = setInterval(function(){
-            me.stopTimer();
-            me.runTimer();
+            me.restartTimer();
             me.checkFunction()
         }, this.timerInterval*1000);
     }
