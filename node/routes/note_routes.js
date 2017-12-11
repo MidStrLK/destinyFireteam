@@ -4,6 +4,7 @@
 const categories    = require('../components/categories');
 const activity      = require('../components/activity');
 const ReviewTelegramBot = require('../bot/reviewtelegrambot');
+const mailer = require('../bot/mailer');
 
 module.exports = function(app) {
 
@@ -25,9 +26,21 @@ module.exports = function(app) {
     });
 
     app.post('/api/review', (req, res) => {
-        ReviewTelegramBot.sendReview(req.body);
+        let text = req.body;
 
-        res.send('OK');
+        if(text){
+            if(text.text) text = text.text;
+
+            ReviewTelegramBot.sendReview(text);
+
+            mailer.send(text);
+
+            res.send('OK');
+        }else{
+            res.send('NOT OK');
+        }
+
+
     });
 
 

@@ -1,4 +1,12 @@
 {
-    "telegram_token": "",
-    "review_telegram_token": ""
+    "telegram_token":           "",
+    "review_telegram_token":    "",
+
+    "email_user":       "",
+    "email_password":   "",
+    "email_host":       "",
+    "email_port":       0,
+    "email_mailto":     "",
+    "email_mailfrom":   "",
+    "email_subject":    ""
 }
