@@ -4,7 +4,8 @@ input{
     font-size: 18px;
 }
 
-.run-button{
+.run-button,
+.review-button{
     padding: 10px;
     text-align: center;
     width: 100px;
@@ -13,7 +14,14 @@ input{
     background: rgba(255,206,31,0.8);
     border: none;
     font-weight: bold;
+}
+
+.run-button{
     float: left;
+}
+
+.review-button:disabled{
+    opacity: 0.5;
 }
 
 .header-timer-div{
@@ -43,7 +51,7 @@ input{
 }
 
 #input-seconds,
-#input-time {
+#input-time{
     width: 40px;
     background: rgba(255,206,31,0.8);
     border: none;
@@ -69,4 +77,11 @@ input{
 .text-div{
     float: left;
     white-space: nowrap;
+}
+
+#input-review{
+    width: 150px;
+    opacity: 0.6;
+    height: 30px;
+    margin: -4px -4px 0 20px;
 }

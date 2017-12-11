@@ -1,6 +1,7 @@
 import { Component, Injectable, Input, Output, OnInit, EventEmitter  } from '@angular/core';
 
 import { InteractionService }      from './shared/interaction.service';
+import { HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { InteractionService }      from './shared/interaction.service';
 export class AppComponent {
     buttonRun: string = 'START';
     buttonStop: string = 'STOP';
+    buttonReviewLabel: string = 'Отправить';
     buttonLabel: string = this.buttonRun;
     intervalId = null;
     timerId = null;
@@ -17,8 +19,10 @@ export class AppComponent {
     timerCount: string = '0.0';
     time: number = 20;
     requestIsActive: boolean = false;
+    isReviewButtonDisabled: boolean = true;
 
-    constructor(private interactionService: InteractionService) {
+    constructor(private interactionService: InteractionService,
+                private  http: HttpClient) {
         interactionService.runRequestIsActive.subscribe(isActive => (this.requestIsActive = isActive));
     }
 
@@ -44,6 +48,24 @@ export class AppComponent {
 
     onChangeTimeCount(time){
         this.time = time;
+    }
+
+    onChangeReview(text){
+        this.isReviewButtonDisabled = !text;
+    }
+
+    onButtonReviewClick(event, inputElem){
+        const value = inputElem.value;
+
+        inputElem.value = '';
+        this.isReviewButtonDisabled = true;
+
+        if(value){
+            console.info('value - ',value);
+            this.http.post('/api/review', {text: value}).subscribe((data) => {
+                console.log('data - ', data);
+            });
+        }
     }
 
     changeButtonLabel(){

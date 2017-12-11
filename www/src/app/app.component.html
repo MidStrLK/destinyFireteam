@@ -20,6 +20,11 @@
         <span class="text-span">минут.</span>
     </div>
 
+    <div class="text-div">
+        <input id="input-review" #inputReview type="text" name="review"[ngModel]="review" (ngModelChange)="onChangeReview($event)" (ngValue)="reviewInputValue">
+        <button class="review-button" (click)="onButtonReviewClick($event, inputReview)" [disabled]="isReviewButtonDisabled">{{buttonReviewLabel}}</button>
+    </div>
+
 </div>
 
 <category-table></category-table>

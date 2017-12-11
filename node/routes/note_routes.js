@@ -3,6 +3,7 @@
  */
 const categories    = require('../components/categories');
 const activity      = require('../components/activity');
+const ReviewTelegramBot = require('../bot/reviewtelegrambot');
 
 module.exports = function(app) {
 
@@ -22,6 +23,14 @@ module.exports = function(app) {
 
         activity(func, req.query.time);
     });
+
+    app.post('/api/review', (req, res) => {
+        ReviewTelegramBot.sendReview(req.body);
+
+        res.send('OK');
+    });
+
+
 
 
 };

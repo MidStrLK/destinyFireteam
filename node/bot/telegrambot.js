@@ -1,7 +1,7 @@
 let TelegramBot         = require('node-telegram-bot-api');
 const links             = require("../shared/settings").links;
 const activity          = require("../components/activity");
-const token             = '490988845:AAHgEk_qPQOl9Is4wPzpZU-xk6enkZMq7Uw';
+const token             = require("../../manifest.json")['telegram_token'];
 const defaultTimeCount  = 30;
 let savedActivityArray  = [];
 let intervalId          = null;
@@ -16,6 +16,8 @@ exports.start = start;
 
 
 function start() {
+    if(!token) return;
+
     var bot = new TelegramBot(token, {polling: true});
 
     bot['onText'](/\/stop (.+)/, function(){
