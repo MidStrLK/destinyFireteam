@@ -11,13 +11,14 @@ import { HttpClient} from '@angular/common/http';
 export class AppComponent {
     buttonRun: string = 'START';
     buttonStop: string = 'STOP';
-    buttonReviewLabel: string = 'Отправить';
+    buttonClearLabel: string = 'Очистить';
+    buttonReviewLabel: string = 'Отзыв';
     buttonLabel: string = this.buttonRun;
     intervalId = null;
     timerId = null;
     timerCountDefault: string = '0.0';
     timerCount: string = '0.0';
-    time: number = 20;
+    time: number = parseInt(localStorage.getItem('time')) || 20;
     requestIsActive: boolean = false;
     isReviewButtonDisabled: boolean = true;
 
@@ -26,7 +27,7 @@ export class AppComponent {
         interactionService.runRequestIsActive.subscribe(isActive => (this.requestIsActive = isActive));
     }
 
-    @Input() timerInterval: number = 10;
+    @Input() timerInterval: number = parseInt(localStorage.getItem('timerInterval')) || 10;
 
     onButtonRunClick($event: any, data: any){
         if(this.buttonLabel === this.buttonRun){
@@ -35,19 +36,24 @@ export class AppComponent {
             this.stopCheckInterval();
         }
 
-        this.changeButtonLabel();
+        this.changeButtonLabel(false);
     }
+
+    onButtonClearClick($event: any){
+        this.stopCheckInterval();
+        this.changeButtonLabel(this.buttonRun);
+        this.clearFunction();
+    }
+
 
     onChangeTimer(count){
         this.timerInterval = count;
-
-        /*if(this.buttonLabel === this.buttonStop){
-            this.runCheckInterval();
-        }*/
+        localStorage.setItem('timerInterval', count);
     }
 
     onChangeTimeCount(time){
         this.time = time;
+        localStorage.setItem('time', time);
     }
 
     onChangeReview(text){
@@ -68,8 +74,8 @@ export class AppComponent {
         }
     }
 
-    changeButtonLabel(){
-        this.buttonLabel = (this.buttonLabel === this.buttonRun) ? this.buttonStop : this.buttonRun;
+    changeButtonLabel(label){
+        this.buttonLabel = label || ((this.buttonLabel === this.buttonRun) ? this.buttonStop : this.buttonRun);
     }
 
     runTimer(){
@@ -87,7 +93,6 @@ export class AppComponent {
     }
 
     stopTimer(){
-        console.info('stopTimer - ',this.timerId);
         clearInterval(this.timerId);
         this.timerCount = this.timerCountDefault;
     }
@@ -117,5 +122,9 @@ export class AppComponent {
 
     checkFunction(){
         this.interactionService.getActivityFromMain(this.time);
+    }
+
+    clearFunction(){
+        this.interactionService.clearActivityFromMain();
     }
 }

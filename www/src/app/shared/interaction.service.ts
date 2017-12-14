@@ -9,9 +9,14 @@ import { Subject }                          from 'rxjs/Subject'
 export class InteractionService{
     public runGetActivity = new Subject<any>();
     public runRequestIsActive = new Subject<any>();
+    public clearActivity = new Subject<any>();
 
     getActivityFromMain(time: number){
         this.runGetActivity.next(time)
+    }
+
+    clearActivityFromMain(){
+        this.clearActivity.next()
     }
 
 

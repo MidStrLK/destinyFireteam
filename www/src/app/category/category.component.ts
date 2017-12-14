@@ -22,6 +22,7 @@ export class CategoryComponent {
     constructor(private interactionService:  InteractionService,
                 private  http: HttpClient){
         interactionService.runGetActivity.subscribe(time => this.getActivity(time));
+        interactionService.clearActivity.subscribe(data => this.clearActivity(data));
     }
 
     /*ngOnInit(){
@@ -37,6 +38,12 @@ export class CategoryComponent {
             this.activityData = data;
             this.interactionService.setRequestIsActive(false);
         });
+    }
+
+    clearActivity(data: any){
+        this.arrayCell = null;
+        this.activityData = null;
+        this.vizitedObject = {};
     }
 
     setVizitedObject(data){
