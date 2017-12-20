@@ -3,17 +3,15 @@ import { Component, Injectable, Input, Output, OnInit, EventEmitter  } from '@an
 import { InteractionService }      from './shared/interaction.service';
 import { HttpClient} from '@angular/common/http';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    buttonRun: string = 'START';
-    buttonStop: string = 'STOP';
-    buttonClearLabel: string = 'Очистить';
-    buttonReviewLabel: string = 'Отзыв';
-    buttonLabel: string = this.buttonRun;
+    disabledRunButton: boolean = false;
     intervalId = null;
     timerId = null;
     timerCountDefault: string = '0.0';
@@ -21,27 +19,70 @@ export class AppComponent {
     time: number = parseInt(localStorage.getItem('time')) || 20;
     requestIsActive: boolean = false;
     isReviewButtonDisabled: boolean = true;
+    language: string[] = ['ru', 'en'];
+    activeLangs: any = {};
 
     constructor(private interactionService: InteractionService,
-                private  http: HttpClient) {
+                private  http: HttpClient,
+                private translate: TranslateService) {
         interactionService.runRequestIsActive.subscribe(isActive => (this.requestIsActive = isActive));
+        translate['setDefaultLang'](this.getDefaultLang());
+    }
+
+    getDefaultLang(){
+        let lang = 'ru';
+
+        if(this.language && this.language[0]) lang = this.language[0];
+
+        if(localStorage.getItem('lang') && this.language.indexOf(localStorage.getItem('lang')) !== -1) lang = localStorage.getItem('lang');
+
+        this.setActiveLang(lang);
+
+        return lang;
+    }
+
+    setActiveLang(lang: string){
+        this.activeLangs = {};
+
+        this.language.forEach(lg =>{
+            this.activeLangs[lg] = (lg === lang) ? 'lang-selected' : 'lang-notselected';
+        })
+    }
+
+    switchLanguage(lang: string) {
+        console.info('lang - ',lang);
+        if(this.language.indexOf(lang) === -1) return;
+
+        localStorage.setItem('lang', lang);
+        this.setActiveLang(lang);
+        this.translate.use(lang);
     }
 
     @Input() timerInterval: number = parseInt(localStorage.getItem('timerInterval')) || 10;
 
-    onButtonRunClick($event: any, data: any){
-        if(this.buttonLabel === this.buttonRun){
-            this.runCheckInterval();
-        }else{
-            this.stopCheckInterval();
-        }
+    onButtonRunClick($event: any, data: any) {
+        this.runCheckInterval();
 
-        this.changeButtonLabel(false);
+        this.disableRunButton(true);
+    }
+
+    onButtonStopClick($event: any, data: any){
+        this.stopCheckInterval();
+
+        this.disableRunButton(false);
+    }
+
+    disableRunButton(disable: boolean){
+        this.disabledRunButton = disable;
+    }
+
+    onButtonOnceClick($event: any, data: any){
+        this.checkFunction()
     }
 
     onButtonClearClick($event: any){
         this.stopCheckInterval();
-        this.changeButtonLabel(this.buttonRun);
+        this.disableRunButton(false);
         this.clearFunction();
     }
 
@@ -74,9 +115,9 @@ export class AppComponent {
         }
     }
 
-    changeButtonLabel(label){
+    /*changeButtonLabel(label){
         this.buttonLabel = label || ((this.buttonLabel === this.buttonRun) ? this.buttonStop : this.buttonRun);
-    }
+    }*/
 
     runTimer(){
         let me = this;

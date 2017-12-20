@@ -5,8 +5,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve  --proxy-config proxy.conf.json",
-
-
     "dev": "ng serve  --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
@@ -24,7 +22,9 @@
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
+    "@ngx-translate/core": "^9.0.2",
     "core-js": "^2.4.1",
+    "i18n": "^0.8.3",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },

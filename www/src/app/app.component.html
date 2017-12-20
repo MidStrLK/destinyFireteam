@@ -1,34 +1,38 @@
 <div class="header">
     <div class="text-div">
-        <button class="run-button" (click)="onButtonRunClick($event)">{{buttonLabel}}</button>
+        <button translate class="run-button" (click)="onButtonRunClick($event)" *ngIf="!disabledRunButton">button-run-label</button>
+        <button translate class="run-button" (click)="onButtonStopClick($event)" *ngIf="disabledRunButton">button-stop-label</button>
+        <button translate class="run-button button-margin" (click)="onButtonOnceClick($event)">button-once-label</button>
+        <button translate class="run-button button-margin" (click)="onButtonClearClick($event)">button-clear-label</button>
 
+        <input id="input-review" #inputReview type="text" name="review"[ngModel]="review" (ngModelChange)="onChangeReview($event)" (ngValue)="reviewInputValue">
+        <button translate class="review-button text-span-margin" (click)="onButtonReviewClick($event, inputReview)" [disabled]="isReviewButtonDisabled">button-review-label</button>
+
+        <button *ngFor="let item of language" class="lang lang-{{item}} {{activeLangs[item]}}" (click)="switchLanguage(item)">{{item}}</button>
+
+    </div>
+
+    <br>
+
+    <div class="text-div text-span-margin-top">
         <div class="header-timer-div"><span class="header-timer">{{timerCount}}</span></div>
 
         <div class="request_is_passive" *ngIf="!requestIsActive"></div>
         <div class="request_is_active"  *ngIf="requestIsActive"></div>
-    </div>
 
-    <div class="text-div text-span-margin">
-        <span class="text-span">Обновление раз в</span>
+        <span class="text-span" translate>update-text</span>
         <input id="input-seconds" type="number" name="seconds" min="10" max="60" [ngModel]="timerInterval" (ngModelChange)="onChangeTimer($event)">
-        <span class="text-span">сек.</span>
-    </div>
+        <span class="text-span" translate>seconds</span>
 
-    <div class="text-div text-span-margin">
-        <span class="text-span">Показать данные за последние</span>
+        <span translate class="text-span">show-data</span>
         <input id="input-time" type="number" name="time" min="1" max="60" [ngModel]="time" (ngModelChange)="onChangeTimeCount($event)">
-        <span class="text-span">мин.</span>
-    </div>
+        <span translate class="text-span">minutes</span>
 
-    <div class="text-div">
-        <button class="run-button" (click)="onButtonClearClick($event)">{{buttonClearLabel}}</button>
-    </div>
 
-    <div class="text-div">
-        <input id="input-review" #inputReview type="text" name="review"[ngModel]="review" (ngModelChange)="onChangeReview($event)" (ngValue)="reviewInputValue">
-        <button class="review-button" (click)="onButtonReviewClick($event, inputReview)" [disabled]="isReviewButtonDisabled">{{buttonReviewLabel}}</button>
     </div>
 
 </div>
+
+
 
 <category-table></category-table>

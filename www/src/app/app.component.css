@@ -17,7 +17,11 @@ input{
 }
 
 .run-button{
-    float: left;
+    /*float: left;*/
+}
+
+.button-margin{
+    margin-left: 10px;
 }
 
 .review-button:disabled{
@@ -29,7 +33,7 @@ input{
     float: left;
     text-align: center;
     font-size: 34px;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 
 .header-timer{
@@ -48,6 +52,10 @@ input{
 
 .text-span-margin{
     margin-right: 20px;
+}
+
+.text-span-margin-top{
+    /*margin-top: 20px;*/
 }
 
 #input-seconds,
@@ -75,7 +83,7 @@ input{
 }
 
 .text-div{
-    float: left;
+    /*float: left;*/
     white-space: nowrap;
 }
 
@@ -84,4 +92,18 @@ input{
     opacity: 0.6;
     height: 30px;
     margin: -4px -4px 0 20px;
+}
+
+.lang{
+    margin-right: 5px;
+    height: 35px;
+    width: 35px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,206,31,0.8);
+    background-color: black;
+    color: rgba(255,206,31,0.8);
+}
+
+.lang-selected{
+    opacity: 0.6;
 }
