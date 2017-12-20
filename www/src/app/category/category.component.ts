@@ -35,9 +35,20 @@ export class CategoryComponent {
         this.http.get('/api/activity?time=' + time).subscribe((data) => {
             this.setVizitedObject(data);
             this.arrayCell = this.getArrayCell(data);
-            this.activityData = data;
+            this.activityData = this.prepareActivityData(data);
+            console.info('this.activityData - ',this.activityData);
             this.interactionService.setRequestIsActive(false);
         });
+    }
+
+    prepareActivityData(data: any){
+        let arr = [];
+
+        data.forEach(item => {
+            if(item && item['activity'] && item['activity'].length) arr.push(item);
+        });
+
+        return arr;
     }
 
     clearActivity(data: any){

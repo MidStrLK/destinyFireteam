@@ -4,11 +4,14 @@
     table-layout: auto;
     width: 100%;
     font-family: 'Roboto', sans-serif;
+    float: left;
 }
 
 .activity-card{
     vertical-align: top;
     background-color: #181c25;
+    padding: 10px;
+    border: 1px solid #303948;
 }
 
 .activity-details-div>a{
@@ -70,3 +73,14 @@
     opacity: 0.3;
 
 }
+
+.content{
+    /*clear: both;*/
+}
+
+/*.container {
+    display: grid;
+    !*grid-gap: 200px 10px;*!
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-rows: repeat(6, 350px);
+}*/
