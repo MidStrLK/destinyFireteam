@@ -3,9 +3,9 @@
     "button-stop-label": "Stop",
     "button-once-label": "Check",
     "update-text": "Update times in",
-    "seconds": "seconds. ",
+    "seconds-name": "seconds.",
     "show-data": "Show data for last",
-    "minutes": "minutes",
+    "minutes-name": "minutes",
     "button-clear-label": "Clear",
     "button-review-label": "Review"
 }
